@@ -25,13 +25,21 @@ class OrderDBTest {
             testOrderDB.getOrderById("2");
             fail();
         } catch (OrderNotFoundException e){
-            assertEquals("Order with eid 2 not found",e.getMessage());
+            assertEquals("Order with id 2 not found",e.getMessage());
         }
     }
 
     @Test
     void whenGetOrderById_ReturnOrder(){
         Order expected = order1;
+        Order actual = testOrderDB.getOrderById("1");
+        assertEquals(expected,actual);
+    }
+
+    @Test
+    void whenUpdateOrder_checkNewStatus(){
+        Order expected = order1;
+        testOrderDB.updateOrderStatus("1",OrderStatus.DELIVERED);
         Order actual = testOrderDB.getOrderById("1");
         assertEquals(expected,actual);
     }
